@@ -1,0 +1,144 @@
+---
+title: "7BBG2016 Advanced Bioinformatics 2019 assessment"
+author: "Amy Glossop 8798"
+date: "24/07/2019"
+output:
+  html_document:
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task 1 - sum of integers between 5 and 55
+Using the *sum()* function and *:* operator, write an expression in the code snippet to evaluate the sum of all integers between 5 and 55.
+
+## R:
+```{r} 
+print("Task 1")
+sum(5:55)
+
+```
+
+# Task 2 - sumfun function - sum of integers between 5 and n where n = 10, 20 and 100
+Write a function called *sumfun* with one input parameter, called n, that calculates the sum of all integers between 5 and n. Use the function to do the calculation for n = 10, n = 20, and n = 100 and present the results.
+
+## R:
+```{r}
+print("Task 2")
+# make sumfun function()
+sumfun <- function(n) {
+    sum(5:n)
+    }
+# calculation for n = 10, n = 20, and n = 100
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+
+# Task 3 - First 12 entries of Fibonacci series
+The famous Fibonacci series is calculated as the sum of the two preceding members of the sequence, where the first two steps in the sequence are 1, 1. Write an R script using a for loop to calculate and print out the first 12 entries of the Fibonacci series
+
+## R:
+```{r}
+print("Task 3")
+# numeric vector of 12 named Task3
+Task3 <- numeric(12)
+# first two numbers of series are 1 and 1
+Task3[1] <- 1
+Task3[2] <- 1
+# for loop for 3 to 12 of series so that each value is the sum of the previous two
+for (i in 3:12) Task3[i] <- Task3[i-2] + Task3[i-1]
+# print the entire series of 12 values
+Task3
+```
+
+#  Task 4 - boxplot of mpg by number of gears
+With the mtcars dataset bundled with R, use *ggplot* to generate a box plot of miles per gallon (in the variable *mpg*) as a function of the number of gears (in the variable *gear*). Tip: use the *as.factor* function to convert the gear variable from numeric into factor. For bonus point: use the fill aesthetic to colour bars by number of gears (Tip: see ggplot2 cheat sheet at RStudio.com for different ggplot options).
+
+## R:
+```{r}
+print("Task 4")
+# load ggplot2 using library(ggplot2)
+library(ggplot2)
+
+# ggplot
+data(mtcars)
+mtcars$gear <- as.factor(mtcars$gear)
+ggplot(mtcars,aes(x=gear,y=mpg, fill=gear))+geom_boxplot()
+```
+```
+
+# Task 5 = model fitting between speed and breaking distance
+Using the *cars* dataset and the function *lm*, fit a linear relationship between *speed* (in units of mph) and breaking distance (in units of feet) in the variable *dist*. What are fitted slope and intercept of the line, and their standard deviations?
+
+## R:
+```{r}
+print("Task 5")
+# set x and y
+y <- cars$dist
+x<- cars$speed
+
+# Linear model lm()
+model <- lm(formula="y~x")
+model
+
+# summary() 
+summary(model)
+```
+
+- The Slope (speed) is 3.932  
+
+- The (Intercept) is -17.597
+
+From the Estimate and Std. Error columns in the summary output, the standard deviations or Std. Errors are:  
+
+- Slope Std. Error = 0.4155  
+- Intercept Std. Errrors = 6.7584
+
+
+# Task 6
+Use ggplot to plot the data points from Question 5 and the linear fit.
+
+## R:
+```{r}
+print("Task 6")
+# Use ggplot to plot the data points from Task 5 and the linear fit.
+ggplot(cars,aes(speed,dist)) + 
+    geom_point() + 
+    geom_smooth(method="lm",formula="y~x")
+```
+
+# Task 7
+Again using the cars dataset, now use linear regression (*lm*) to estimate the average reaction time for the driver to start breaking (in seconds). To simplify matters you may assume that once breaking commences, breaking distance is proportional to the square of the speed. You may also use that 1 mile = 5280 feet and 1h = 3600 seconds. Note that you'll need to use the *I()* function in the regression formula to make sure any non-linear terms gets treated literally, rather than as combinations of factors (e.g. *I(x^2)* for a term quadratic in the variable x). Do you get reasonable results? Finally, use ggplot to plot the data points and the fitted relationship.
+
+## R:
+
+```{r}
+print("Task 7")
+# change units of speed to ft/second in order to estimate reaction time in seconds
+cars$speedconverted <- cars$speed * (5280/3600)
+
+# set x and y
+y <- cars$dist
+x <- cars$speedconverted
+
+# linear model: fit quadratic formula with zero offset
+modeltaskseven <- lm(y~0+x+I(x^2))
+summary(modeltaskseven)
+```
+
+The estimated reaction delay is 0.84475 seconds. (Reasonable result)
+
+plot
+
+```{r}
+
+# ggplot to plot data points and fitted relationship
+ggplot(cars,aes(x=speedconverted, y=dist)) + 
+    geom_point() + 
+    geom_smooth(method="lm", formula="y~0+x+I(x^2)")
+```
+
+

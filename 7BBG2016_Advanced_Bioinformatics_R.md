@@ -126,7 +126,7 @@ ggplot(mtcars,aes(x=gear,y=mpg, fill=gear))+geom_boxplot()
 
 ![](7BBG2016_Advanced_Bioinformatics_R_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
-# Task 5 = model fitting between speed and breaking distance
+# Task 5 - model fitting between speed and breaking distance
 Using the *cars* dataset and the function *lm*, fit a linear relationship between *speed* (in units of mph) and breaking distance (in units of feet) in the variable *dist*. What are fitted slope and intercept of the line, and their standard deviations?
 
 ## R:
@@ -195,7 +195,7 @@ From the Estimate and Std. Error columns in the summary output, the standard dev
 - Intercept Std. Errrors = 6.7584
 
 
-# Task 6
+# Task 6 - gplot of task 5
 Use ggplot to plot the data points from Question 5 and the linear fit.
 
 ## R:
@@ -217,7 +217,7 @@ ggplot(cars,aes(speed,dist)) +
 
 ![](7BBG2016_Advanced_Bioinformatics_R_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-# Task 7
+# Task 7 - reaction time linear regression
 Again using the cars dataset, now use linear regression (*lm*) to estimate the average reaction time for the driver to start breaking (in seconds). To simplify matters you may assume that once breaking commences, breaking distance is proportional to the square of the speed. You may also use that 1 mile = 5280 feet and 1h = 3600 seconds. Note that you'll need to use the *I()* function in the regression formula to make sure any non-linear terms gets treated literally, rather than as combinations of factors (e.g. *I(x^2)* for a term quadratic in the variable x). Do you get reasonable results? Finally, use ggplot to plot the data points and the fitted relationship.
 
 ## R:

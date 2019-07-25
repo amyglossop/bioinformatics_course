@@ -125,7 +125,6 @@ ggplot(mtcars,aes(x=gear,y=mpg, fill=gear))+geom_boxplot()
 ```
 
 ![](7BBG2016_Advanced_Bioinformatics_R_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
-```
 
 # Task 5 = model fitting between speed and breaking distance
 Using the *cars* dataset and the function *lm*, fit a linear relationship between *speed* (in units of mph) and breaking distance (in units of feet) in the variable *dist*. What are fitted slope and intercept of the line, and their standard deviations?
